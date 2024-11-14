@@ -1,39 +1,76 @@
 grammar FOOLI;
 
-program: classDeclaration* EOF;
+program
+    : classDeclaration* mainFunction EOF
+    ;
 
-classDeclaration: 'class' IDENTIFIER '{' classBody '}' ;
+mainFunction
+    : 'void' 'main' '(' ')' block
+    ;
 
-classBody: member* ;
+classDeclaration
+    : '{' 'class' IDENTIFIER classBody '}'
+    ;
 
-member: fieldDeclaration | methodDeclaration ;
+classBody
+    : fieldDeclaration* methodDeclaration*
+    ;
 
-fieldDeclaration: type IDENTIFIER ';' ;
+fieldDeclaration
+    : type IDENTIFIER ';'
+    ;
 
-methodDeclaration: type IDENTIFIER '(' parameters? ')' block ;
+methodDeclaration
+    : type IDENTIFIER '(' parameters? ')' block
+    ;
 
-parameters: parameter (',' parameter)* ;
-parameter: type IDENTIFIER ;
+parameters
+    : parameter (',' parameter)*
+    ;
 
-type: 'int' | 'bool' | 'void' | IDENTIFIER ;
+parameter
+    : type IDENTIFIER
+    ;
 
-block: '{' statement* '}' ;
+type
+    : 'int' | 'bool' | 'void' | IDENTIFIER
+    ;
 
-statement: ifStatement
-         | returnStatement
-         | assignment
-         | expressionStatement
-         ;
+block
+    : '{' statement* '}'
+    ;
 
-ifStatement: 'if' '(' expression ')' block ('else' block)?;
+statement
+    : ifStatement
+    | returnStatement
+    | assignment
+    | expressionStatement
+    | whileStatement
+    ;
 
-returnStatement: 'return' expression? ';' ;
+ifStatement
+    : 'if' '(' expression ')' block ('else' block)?
+    ;
 
-assignment: IDENTIFIER '=' expression ';' ;
+returnStatement
+    : 'return' expression? ';'
+    ;
 
-expressionStatement: expression ';' ;
+assignment
+    : IDENTIFIER '=' expression ';'
+    ;
 
-expression: logicalOrExpression ;
+expressionStatement
+    : expression ';'
+    ;
+
+whileStatement
+    : 'while' '(' expression ')' block
+    ;
+
+expression
+    : logicalOrExpression
+    ;
 
 logicalOrExpression
     : logicalOrExpression '||' logicalAndExpression

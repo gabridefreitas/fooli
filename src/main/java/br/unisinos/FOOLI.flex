@@ -23,6 +23,9 @@ IDENTIFIER = {LETTER}({LETTER}|{DIGIT}|_)*
 "and"                       { return new Symbol(sym.AND_OPERATOR); }
 "or"                        { return new Symbol(sym.OR_OPERATOR); }
 
+"while"                     { return new Symbol(sym.WHILE_KEYWORD); }
+"main"                      { return new Symbol(sym.MAIN_FUNCTION); }
+
 "=="                        { return new Symbol(sym.EQUALITY_OPERATOR); }
 "<"                         { return new Symbol(sym.LESS_THAN_OPERATOR); }
 ">"                         { return new Symbol(sym.GREATER_THAN_OPERATOR); }
