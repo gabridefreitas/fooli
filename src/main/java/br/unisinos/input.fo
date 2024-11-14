@@ -1,0 +1,10 @@
+class Example {
+    int a;
+    int foo(int x) {
+        if (x > 0) {
+            return a + x;
+        } else {
+            return a;
+        }
+    }
+}
