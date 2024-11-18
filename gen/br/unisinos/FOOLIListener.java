@@ -18,6 +18,16 @@ public interface FOOLIListener extends ParseTreeListener {
 	 */
 	void exitProgram(FOOLIParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FOOLIParser#mainFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterMainFunction(FOOLIParser.MainFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FOOLIParser#mainFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitMainFunction(FOOLIParser.MainFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FOOLIParser#classDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -38,15 +48,15 @@ public interface FOOLIListener extends ParseTreeListener {
 	 */
 	void exitClassBody(FOOLIParser.ClassBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FOOLIParser#member}.
+	 * Enter a parse tree produced by {@link FOOLIParser#classUsage}.
 	 * @param ctx the parse tree
 	 */
-	void enterMember(FOOLIParser.MemberContext ctx);
+	void enterClassUsage(FOOLIParser.ClassUsageContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FOOLIParser#member}.
+	 * Exit a parse tree produced by {@link FOOLIParser#classUsage}.
 	 * @param ctx the parse tree
 	 */
-	void exitMember(FOOLIParser.MemberContext ctx);
+	void exitClassUsage(FOOLIParser.ClassUsageContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FOOLIParser#fieldDeclaration}.
 	 * @param ctx the parse tree
@@ -67,6 +77,16 @@ public interface FOOLIListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMethodDeclaration(FOOLIParser.MethodDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FOOLIParser#methodExecution}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodExecution(FOOLIParser.MethodExecutionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FOOLIParser#methodExecution}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodExecution(FOOLIParser.MethodExecutionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FOOLIParser#parameters}.
 	 * @param ctx the parse tree
@@ -157,6 +177,16 @@ public interface FOOLIListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionStatement(FOOLIParser.ExpressionStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FOOLIParser#whileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStatement(FOOLIParser.WhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FOOLIParser#whileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStatement(FOOLIParser.WhileStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FOOLIParser#expression}.
 	 * @param ctx the parse tree

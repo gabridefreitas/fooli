@@ -1,0 +1,20 @@
+{
+    class Example
+
+    int a;
+
+    int foo(int x) {
+        while(True) {
+            if (x > 0) {
+                return a + x;
+            } else {
+                return a;
+            }
+        }
+    }
+}
+
+void main() {
+    Example.a = 0;
+    Example.foo(1);
+}

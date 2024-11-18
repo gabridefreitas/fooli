@@ -13,7 +13,13 @@ classDeclaration
     ;
 
 classBody
-    : fieldDeclaration* methodDeclaration*
+    : fieldDeclaration* methodDeclaration* mainFunction?
+    ;
+
+classUsage
+    : IDENTIFIER '.' IDENTIFIER ';'
+    | IDENTIFIER '.' assignment
+    | IDENTIFIER '.' methodExecution
     ;
 
 fieldDeclaration
@@ -24,12 +30,16 @@ methodDeclaration
     : type IDENTIFIER '(' parameters? ')' block
     ;
 
+methodExecution
+    : IDENTIFIER '(' parameters? ')' ';'
+    ;
+
 parameters
     : parameter (',' parameter)*
     ;
 
 parameter
-    : type IDENTIFIER
+    : type? IDENTIFIER | INTEGER_LITERAL
     ;
 
 type
@@ -46,6 +56,9 @@ statement
     | assignment
     | expressionStatement
     | whileStatement
+    | methodExecution
+    | fieldDeclaration
+    | classUsage
     ;
 
 ifStatement
@@ -70,6 +83,7 @@ whileStatement
 
 expression
     : logicalOrExpression
+    | methodExecution
     ;
 
 logicalOrExpression

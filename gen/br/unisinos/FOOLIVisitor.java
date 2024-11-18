@@ -17,6 +17,12 @@ public interface FOOLIVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(FOOLIParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link FOOLIParser#mainFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainFunction(FOOLIParser.MainFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link FOOLIParser#classDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -29,11 +35,11 @@ public interface FOOLIVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassBody(FOOLIParser.ClassBodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FOOLIParser#member}.
+	 * Visit a parse tree produced by {@link FOOLIParser#classUsage}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMember(FOOLIParser.MemberContext ctx);
+	T visitClassUsage(FOOLIParser.ClassUsageContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLIParser#fieldDeclaration}.
 	 * @param ctx the parse tree
@@ -46,6 +52,12 @@ public interface FOOLIVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMethodDeclaration(FOOLIParser.MethodDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLIParser#methodExecution}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodExecution(FOOLIParser.MethodExecutionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLIParser#parameters}.
 	 * @param ctx the parse tree
@@ -100,6 +112,12 @@ public interface FOOLIVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpressionStatement(FOOLIParser.ExpressionStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FOOLIParser#whileStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhileStatement(FOOLIParser.WhileStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FOOLIParser#expression}.
 	 * @param ctx the parse tree

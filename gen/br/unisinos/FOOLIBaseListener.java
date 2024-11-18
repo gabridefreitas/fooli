@@ -29,6 +29,18 @@ public class FOOLIBaseListener implements FOOLIListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMainFunction(FOOLIParser.MainFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMainFunction(FOOLIParser.MainFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterClassDeclaration(FOOLIParser.ClassDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -53,13 +65,13 @@ public class FOOLIBaseListener implements FOOLIListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMember(FOOLIParser.MemberContext ctx) { }
+	@Override public void enterClassUsage(FOOLIParser.ClassUsageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMember(FOOLIParser.MemberContext ctx) { }
+	@Override public void exitClassUsage(FOOLIParser.ClassUsageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -84,6 +96,18 @@ public class FOOLIBaseListener implements FOOLIListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMethodDeclaration(FOOLIParser.MethodDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodExecution(FOOLIParser.MethodExecutionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodExecution(FOOLIParser.MethodExecutionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -192,6 +216,18 @@ public class FOOLIBaseListener implements FOOLIListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpressionStatement(FOOLIParser.ExpressionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWhileStatement(FOOLIParser.WhileStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhileStatement(FOOLIParser.WhileStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
