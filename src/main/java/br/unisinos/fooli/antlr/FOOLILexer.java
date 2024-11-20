@@ -1,5 +1,11 @@
 // Generated from /Users/locacao/Documents/code/fooli/src/main/java/br/unisinos/FOOLI.g4 by ANTLR 4.13.2
-package br.unisinos;
+package br.unisinos.fooli.antlr;
+
+    import java.util.Map;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.ArrayList;
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -90,6 +96,10 @@ public class FOOLILexer extends Lexer {
 	public Vocabulary getVocabulary() {
 		return VOCABULARY;
 	}
+
+
+	    Map<String, String> symbolTable = new HashMap<>();
+	    List<String> tacList = new ArrayList<>();
 
 
 	public FOOLILexer(CharStream input) {

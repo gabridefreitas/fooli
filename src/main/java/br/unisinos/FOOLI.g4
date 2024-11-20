@@ -1,5 +1,17 @@
 grammar FOOLI;
 
+@header {
+    import java.util.Map;
+    import java.util.HashMap;
+    import java.util.List;
+    import java.util.ArrayList;
+}
+
+@members {
+    Map<String, String> symbolTable = new HashMap<>();
+    List<String> tacList = new ArrayList<>();
+}
+
 program
     : classDeclaration* mainFunction EOF
     ;
@@ -10,6 +22,7 @@ mainFunction
 
 classDeclaration
     : '{' 'class' IDENTIFIER classBody '}'
+      { symbolTable.put($IDENTIFIER.text, "class"); }
     ;
 
 classBody
@@ -18,20 +31,24 @@ classBody
 
 classUsage
     : IDENTIFIER '.' IDENTIFIER ';'
+      { tacList.add($IDENTIFIER.text + "." + $IDENTIFIER(1).text + ";"); }
     | IDENTIFIER '.' assignment
     | IDENTIFIER '.' methodExecution
     ;
 
 fieldDeclaration
     : type IDENTIFIER ';'
+      { symbolTable.put($IDENTIFIER.text, $type.ctx.text); }
     ;
 
 methodDeclaration
     : type IDENTIFIER '(' parameters? ')' block
+      { symbolTable.put($IDENTIFIER.text, "method: " + $type.ctx.text); }
     ;
 
 methodExecution
     : IDENTIFIER '(' parameters? ')' ';'
+      { tacList.add("CALL " + $IDENTIFIER.text + " " + ($parameters != null ? $parameters.text : "")); }
     ;
 
 parameters
@@ -39,7 +56,9 @@ parameters
     ;
 
 parameter
-    : type? IDENTIFIER | INTEGER_LITERAL
+    : type? IDENTIFIER
+      { symbolTable.put($IDENTIFIER.text, $type != null ? $type.ctx.text : "int"); }
+    | INTEGER_LITERAL
     ;
 
 type
@@ -63,14 +82,17 @@ statement
 
 ifStatement
     : 'if' '(' expression ')' block ('else' block)?
+      { tacList.add("IF " + $expression.text + " THEN ..."); }
     ;
 
 returnStatement
     : 'return' expression? ';'
+      { tacList.add("RETURN " + ($expression != null ? $expression.text : "void")); }
     ;
 
 assignment
     : IDENTIFIER '=' expression ';'
+      { tacList.add($IDENTIFIER.text + " = " + $expression.text + ";"); }
     ;
 
 expressionStatement
@@ -79,6 +101,7 @@ expressionStatement
 
 whileStatement
     : 'while' '(' expression ')' block
+      { tacList.add("WHILE " + $expression.text + " DO ..."); }
     ;
 
 expression
