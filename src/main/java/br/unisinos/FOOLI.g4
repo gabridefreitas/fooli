@@ -22,7 +22,7 @@ mainFunction
 
 classDeclaration
     : '{' 'class' IDENTIFIER classBody '}'
-      { symbolTable.put($IDENTIFIER.text, "class"); }
+      { symbolTable.put($IDENTIFIER.getText(), "class"); }
     ;
 
 classBody
@@ -31,24 +31,24 @@ classBody
 
 classUsage
     : IDENTIFIER '.' IDENTIFIER ';'
-      { tacList.add($IDENTIFIER.text + "." + $IDENTIFIER(1).text + ";"); }
+      { tacList.add($IDENTIFIER(0).getText() + "." + $IDENTIFIER(1).getText() + ";"); }
     | IDENTIFIER '.' assignment
     | IDENTIFIER '.' methodExecution
     ;
 
 fieldDeclaration
     : type IDENTIFIER ';'
-      { symbolTable.put($IDENTIFIER.text, $type.ctx.text); }
+      { symbolTable.put($IDENTIFIER.getText(), $type.value); }
     ;
 
 methodDeclaration
     : type IDENTIFIER '(' parameters? ')' block
-      { symbolTable.put($IDENTIFIER.text, "method: " + $type.ctx.text); }
+      { symbolTable.put($IDENTIFIER.getText(), "method: " + $type.value); }
     ;
 
 methodExecution
     : IDENTIFIER '(' parameters? ')' ';'
-      { tacList.add("CALL " + $IDENTIFIER.text + " " + ($parameters != null ? $parameters.text : "")); }
+      { tacList.add("CALL " + $IDENTIFIER.getText() + " " + ($parameters.text != "" ? $parameters.text : "")); }
     ;
 
 parameters
@@ -56,13 +56,16 @@ parameters
     ;
 
 parameter
-    : type? IDENTIFIER
-      { symbolTable.put($IDENTIFIER.text, $type != null ? $type.ctx.text : "int"); }
+    : type IDENTIFIER
+      { symbolTable.put($IDENTIFIER.getText(), $type.value); }
     | INTEGER_LITERAL
     ;
 
-type
-    : 'int' | 'bool' | 'void' | IDENTIFIER
+type returns [String value]
+    : 'int'     { $value = "int"; }
+    | 'bool'    { $value = "bool"; }
+    | 'void'    { $value = "void"; }
+    | IDENTIFIER { $value = $IDENTIFIER.getText(); }
     ;
 
 block
@@ -82,17 +85,17 @@ statement
 
 ifStatement
     : 'if' '(' expression ')' block ('else' block)?
-      { tacList.add("IF " + $expression.text + " THEN ..."); }
+      { tacList.add("IF " + ($expression.text != null ? $expression.text : "unknown") + " THEN ..."); }
     ;
 
 returnStatement
     : 'return' expression? ';'
-      { tacList.add("RETURN " + ($expression != null ? $expression.text : "void")); }
+      { tacList.add("RETURN " + ($expression.text != "" ? $expression.text : "void")); }
     ;
 
 assignment
     : IDENTIFIER '=' expression ';'
-      { tacList.add($IDENTIFIER.text + " = " + $expression.text + ";"); }
+      { tacList.add($IDENTIFIER.getText() + " = " + ($expression.text != null ? $expression.text : "unknown") + ";"); }
     ;
 
 expressionStatement
@@ -101,7 +104,7 @@ expressionStatement
 
 whileStatement
     : 'while' '(' expression ')' block
-      { tacList.add("WHILE " + $expression.text + " DO ..."); }
+      { tacList.add("WHILE " + ($expression.text != null ? $expression.text : "unknown") + " DO ..."); }
     ;
 
 expression

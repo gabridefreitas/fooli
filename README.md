@@ -36,3 +36,18 @@ void main() {
 ## Resultado
 
 ![img.png](src/main/resources/img.png)
+
+```
+Tabela de Símbolos:
+a : int
+Example : class
+foo : method: int
+
+Three Address Codes (TAC):
+WHILE True DO ...
+IF x>0 THEN ...
+RETURN a+x
+RETURN a
+a = 0;
+CALL foo 1
+```

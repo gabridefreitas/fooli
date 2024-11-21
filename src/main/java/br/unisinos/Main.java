@@ -1,37 +1,33 @@
 package br.unisinos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.antlr.v4.runtime.*;
+
 import br.unisinos.fooli.antlr.FOOLIBaseVisitor;
 import br.unisinos.fooli.antlr.FOOLILexer;
 import br.unisinos.fooli.antlr.FOOLIParser;
 
-import org.antlr.v4.runtime.*;
-
-import java.util.*;
-
 public class Main {
     public static void main(String[] args) {
         try {
-            // Ler o programa de entrada
-            // CharStream input = CharStream.getText(inputFile);
-            CharStream charStream = CharStreams.fromFileName("input.fooli");
+            CharStream charStream = CharStreams.fromFileName("src/main/resources/input.fooli");
 
-            // Inicializar lexer e parser
             FOOLILexer lexer = new FOOLILexer(charStream);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             FOOLIParser parser = new FOOLIParser(tokens);
 
-            // Parsear a entrada
             FOOLIParser.ProgramContext tree = parser.program();
 
-            // Ações semânticas
             FOOLICustomVisitor visitor = new FOOLICustomVisitor();
             visitor.visit(tree);
 
-            // Imprimir tabela de símbolos
             System.out.println("Tabela de Símbolos:");
             visitor.symbolTable.forEach((key, value) -> System.out.println(key + " : " + value));
 
-            // Imprimir TACs
             System.out.println("\nThree Address Codes (TAC):");
             visitor.tacList.forEach(System.out::println);
 
